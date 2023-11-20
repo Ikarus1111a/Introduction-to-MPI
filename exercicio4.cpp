@@ -12,13 +12,13 @@ void probing_process(int &int_sum, float &float_sum) {
   std::cout << "Received a message from process " << source << " with tag " << tag << std::endl;
 
   // 3- Add to int_sum or float_sum depending on the tag of the message
-  if (tag == 0) {
-    int received_int;
-    MPI_Recv(&received_int, 1, MPI_INT, source, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    int_sum += received_int;
-  } else if (tag == 1) {
-    float received_float;
-    MPI_Recv(&received_float, 1, MPI_FLOAT, source, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    float_sum += received_float;
+  if(tag == 0){
+    int s_int;
+    MPI_Recv(&s_int, 1, MPI_INT, source, tag, MPI_COMM_WORLD, &status);
+    int_sum += s_int;
+  }else if(tag == 1){
+    float s_float;
+    MPI_Recv(&s_float, 1, MPI_FLOAT, source, tag, MPI_COMM_WORLD, &status);
+    float_sum += s_float;
   }
 }
